@@ -5,36 +5,30 @@ import {
       IonMenuButton, 
       IonPage, 
       IonTitle, 
-      IonToolbar 
+      IonToolbar,
+      IonButton,
+      IonCard,
+      IonCardContent,
+      IonCardHeader,
+      IonCardSubtitle,
+      IonCardTitle
   } from '@ionic/react';
   
-  const Favorites: React.FC = () => {
-    return (
-      <IonPage>
-        <IonHeader>
-          <IonToolbar>
-            <IonButtons slot='start'>
-              <IonMenuButton></IonMenuButton>
-            </IonButtons>
-            <IonTitle>Favorites</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <IonContent fullscreen>
+  import React from 'react';
+function Favorites() {
+  return (
+    <IonCard>
+      <IonCardHeader>
+        <IonCardTitle>Card Title</IonCardTitle>
+        <IonCardSubtitle>Card Subtitle</IonCardSubtitle>
+      </IonCardHeader>
 
-        <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '100%',
-        }}
-        >
-          Favorites
-        </div>
+      <IonCardContent>Here's a small text description for the card content. Nothing more, nothing less.</IonCardContent>
 
-        </IonContent>
-      </IonPage>
-    );
-  };
-  
+      <IonButton fill="clear">Action 1</IonButton>
+      <IonButton fill="clear">Action 2</IonButton>
+    </IonCard>
+  );
+}
+
   export default Favorites;
