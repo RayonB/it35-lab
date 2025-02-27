@@ -18,16 +18,19 @@ import {
 function Favorites() {
   return (
     <IonCard>
-      <IonCardHeader>
-        <IonCardTitle>Card Title</IonCardTitle>
-        <IonCardSubtitle>Card Subtitle</IonCardSubtitle>
-      </IonCardHeader>
-
-      <IonCardContent>Here's a small text description for the card content. Nothing more, nothing less.</IonCardContent>
-
-      <IonButton fill="clear">Action 1</IonButton>
-      <IonButton fill="clear">Action 2</IonButton>
-    </IonCard>
+    <IonCardHeader>
+      <IonCardTitle>Unlock Your Potential</IonCardTitle>
+      <IonCardSubtitle>Empower Your Journey</IonCardSubtitle>
+    </IonCardHeader>
+  
+    <IonCardContent>
+      Every challenge is an opportunity to grow. Stay focused, keep pushing, and remember that with dedication and hard work, you can achieve anything. Your future is bright—keep moving forward!
+    </IonCardContent>
+  
+    <IonButton fill="clear">Start Now</IonButton>
+    <IonButton fill="clear">Stay Motivated</IonButton>
+  </IonCard>
+  
   );
 }
 

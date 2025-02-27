@@ -5,36 +5,13 @@ import {
       IonMenuButton, 
       IonPage, 
       IonTitle, 
-      IonToolbar 
+      IonToolbar,
+      IonCheckbox
   } from '@ionic/react';
-  
-  const Search: React.FC = () => {
-    return (
-      <IonPage>
-        <IonHeader>
-          <IonToolbar>
-            <IonButtons slot='start'>
-              <IonMenuButton></IonMenuButton>
-            </IonButtons>
-            <IonTitle>Search</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <IonContent fullscreen>
+  import React from 'react';
 
-        <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '100%',
-        }}
-        >
-          Search
-        </div>
+function Search() {
+  return <IonCheckbox>I agree to the terms and conditions</IonCheckbox>;
+}
 
-        </IonContent>
-      </IonPage>
-    );
-  };
-  
   export default Search;
