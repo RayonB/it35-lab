@@ -12,6 +12,7 @@ import {
   useIonRouter,
   IonAlert
 } from '@ionic/react';
+import './Login.css'; 
 
 
 const Login: React.FC = () => {
@@ -35,7 +36,7 @@ const Login: React.FC = () => {
           <IonTitle>Login</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent className='ion-padding background-image'>
+      <IonContent className='ion-padding background-image' id= "Login">
         <IonItem>
           <IonLabel position="floating">Username</IonLabel>
           <IonInput 

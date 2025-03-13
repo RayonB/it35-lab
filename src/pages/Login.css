@@ -1,0 +1,15 @@
+.background-image {
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    height: 100%; 
+    color: white; 
+  }
+  
+  .ion-padding {
+    background: rgba(0, 0, 0, 0.5); 
+    border-radius: 10px; 
+  }
+ #Login {
+    --background: url('https://images.stockcake.com/public/3/3/b/33bf19d3-f437-4fc5-b8f9-14d986f39f0f_large/digital-matrix-landscape-stockcake.jpg') no-repeat center center / cover;
+  }
