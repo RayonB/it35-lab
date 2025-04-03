@@ -1,15 +1,89 @@
-.background-image {
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat; 
-    height: 100%; 
-    color: white; 
+/* Ensure full-page height */
+.ion-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+}
+
+/* Center login card */
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+/* Card Styling */
+.login-card {
+  width: 100%;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  background: #edf3f3; 
+}
+
+
+.registration-modal {
+  background: #ecf8f8; 
+}
+
+.login-container {
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  
-  .ion-padding {
-    background: rgba(0, 0, 0, 0.5); 
-    border-radius: 10px; 
+  to {
+    opacity: 1;
   }
- #Login {
-    --background: url('https://images.stockcake.com/public/3/3/b/33bf19d3-f437-4fc5-b8f9-14d986f39f0f_large/digital-matrix-landscape-stockcake.jpg') no-repeat center center / cover;
+}
+
+
+.login-button {
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.login-button:hover {
+  background-color: #3880ff;
+  transform: scale(1.05);
+}
+
+
+.app-icon {
+  opacity: 0;
+  animation: fadeInIcon 1s forwards 0.5s;
+}
+
+@keyframes fadeInIcon {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
   }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Registration modal animation */
+.registration-modal {
+  animation: modalFadeIn 0.5s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
