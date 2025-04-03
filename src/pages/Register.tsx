@@ -19,7 +19,7 @@ import {
     IonCardTitle,
     IonAvatar,
 } from '@ionic/react';
-import { supabase } from './utils/supabaseClient';
+import { supabase } from '../../utils/supabaseClient';
 import bcrypt from 'bcryptjs';
 
 const Register: React.FC = () => {
