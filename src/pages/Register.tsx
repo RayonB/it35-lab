@@ -81,7 +81,7 @@ const Register: React.FC = () => {
             <IonInput
                 style={{
                     margin: '20px auto',
-                    width: '50%',
+                    width: '70%',
                     borderRadius: '30px',
                     fontFamily: 'Arial, sans-serif',
                     fontSize: '16px',
@@ -100,7 +100,7 @@ const Register: React.FC = () => {
             <IonInput
                 style={{
                     margin: '30px auto',
-                    width: '50%',
+                    width: '70%',
                     borderRadius: '30px',
                     fontFamily: 'Arial, sans-serif',
                     fontSize: '16px',
@@ -119,7 +119,7 @@ const Register: React.FC = () => {
             <IonInput
                 style={{
                     margin: '30px auto',
-                    width: '50%',
+                    width: '70%',
                     borderRadius: '30px',
                     fontFamily: 'Arial, sans-serif',
                     fontSize: '16px',
@@ -139,7 +139,7 @@ const Register: React.FC = () => {
             <IonInput
                 style={{
                     margin: '30px auto',
-                    width: '50%',
+                    width: '70%',
                     borderRadius: '30px',
                     fontFamily: 'Arial, sans-serif',
                     fontSize: '16px',
@@ -158,8 +158,8 @@ const Register: React.FC = () => {
 
             <IonButton
                 style={{
-                    margin: '30px auto',
-                    width: '40%',
+                    margin: '20px auto',
+                    width: '60%',
                     borderRadius: '30px',
                     fontFamily: 'Arial, sans-serif',
                     fontSize: '16px',
@@ -180,7 +180,7 @@ const Register: React.FC = () => {
                 shape="round"
                 style={{
                     margin: '2px auto',
-                    width: '25%',
+                    width: '40%',
                     fontSize: '16px',
                     color: '#74fe26',
                     border: '3px solid #74fe26',
