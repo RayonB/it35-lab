@@ -1,38 +1,24 @@
-/* Ensure full-page height */
+/* Center the content vertically and horizontally */
 .ion-content {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Full viewport height */
+  height: 100vh;
 }
 
-/* Center login card */
+/* Login container styling */
 .login-container {
-  width: 100%;
-  max-width: 400px;
+  width: 10%;
+  max-width: 4px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: auto;
-}
-
-/* Card Styling */
-.login-card {
-  width: 100%;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  background: #edf3f3; 
-}
-
-
-.registration-modal {
-  background: #ecf8f8; 
-}
-
-.login-container {
-  opacity: 0;
+   opacity: 0;
   animation: fadeIn 1s forwards;
 }
 
@@ -45,39 +31,63 @@
   }
 }
 
+/* Avatar styling */
+.app-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: #f1f1f1;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
 
+/* Logo Icon style */
+.app-icon ion-icon {
+  font-size: 80px;
+  color: #3880ff;
+}
+
+/* Heading style */
+.login-heading {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Input fields styling */
+.login-input {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* Button styling */
 .login-button {
+  background-color: #3880ff;
+  color: white;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .login-button:hover {
-  background-color: #3880ff;
+  background-color: #0066cc;
   transform: scale(1.05);
 }
 
-
-.app-icon {
-  opacity: 0;
-  animation: fadeInIcon 1s forwards 0.5s;
+/* Register button style */
+.register-link {
+  text-decoration: underline;
+  font-size: 14px;
+  color: #0066cc;
+  padding: 10px;
+  margin-top: 10px;
 }
 
-@keyframes fadeInIcon {
-  from {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Registration modal animation */
-.registration-modal {
-  animation: modalFadeIn 0.5s ease-out;
-}
-
-@keyframes modalFadeIn {
+/* Animation for fade-in effect */
+@keyframes fadeIn {
   from {
     opacity: 0;
     transform: translateY(20px);

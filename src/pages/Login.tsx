@@ -57,15 +57,15 @@ const Login: React.FC = () => {
           flexDirection:'column',
           alignItems: 'center',
           justifyContent: 'center',
-          marginTop:'25%'
+          marginTop:'2%'
         }}>
           <IonAvatar
             style={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              width: '150px',
-              height: '150px',
+              width: '100px',
+              height: '100px',
               borderRadius: '50%', 
               overflow: 'hidden' 
             }}
@@ -73,24 +73,39 @@ const Login: React.FC = () => {
             <IonIcon 
               icon={logoIonic}
               color='primary'
-              style={{ fontSize: '120px', color: '#6c757d' }} 
+              style={{ 
+                fontSize: '150px', color: '#33f508' 
+              }} 
             />
           </IonAvatar>
           <h1 style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>USER LOGIN</h1>
-          <IonInput
-            label="Email" 
-            labelPlacement="floating" 
+      marginTop:'20px',
+      display: 'flex',
+      width: '100%',
+      alignItems: 'center', 
+      justifyContent: 'center',
+          }}>
+            USER LOGIN</h1>
+          <IonInput style={{
+              marginTop:'15px',
+              display: 'flex',
+              width: '80%',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}      
             fill="outline"
-            type="email"
-            placeholder="Enter Email"
+            type="Email"
+            placeholder="Email"
             value={email}
             onIonChange={e => setEmail(e.detail.value!)}
           />
-          <IonInput style={{ marginTop:'10px' }}      
+          <IonInput style={{
+              marginTop:'15px',
+              display: 'flex',
+              width: '80%',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}      
             fill="outline"
             type="password"
             placeholder="Password"
@@ -100,13 +115,54 @@ const Login: React.FC = () => {
             <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
           </IonInput>
         </div>
-        <IonButton onClick={doLogin} expand="full" shape='round'>
-          Login
-        </IonButton>
+        <IonButton
+  onClick={doLogin}
+  shape="round"
+  style={{
+    display: 'block',
+    margin: '20px auto', 
+    width: '70%',        
+    fontSize: '16px',
+    fontWeight: '800',
+    fontFamily: 'Arial, sans-serif',
+    color: 'white',
+    borderRadius: '100px',
+  }}
+>
+  Login
+</IonButton>
 
-        <IonButton routerLink="/it35-lab/Register" expand="full" fill="clear" shape='round'>
-          Don't have an account? Register here
-        </IonButton>
+<IonButton
+  routerLink="/it35-lab/Register"
+  fill="clear"
+  shape="round"
+  style={{
+    display: 'block',
+    margin: '20px auto',
+    width: '50%',
+    fontSize: '15px',
+    fontWeight: '500',
+    fontFamily: 'Arial, sans-serif',
+    color: '#007bff',
+    border: '1.5px solid #007bff',
+    borderRadius: '25px',
+    backgroundColor: 'transparent',
+    textTransform: 'none',
+    transition: 'all 0.3s ease',
+    boxShadow: '0 2px 6px rgba(0, 123, 255, 0.15)'
+  }}
+  onMouseOver={(e) => {
+    e.currentTarget.style.backgroundColor = '#007bff';
+    e.currentTarget.style.color = '#fff';
+  }}
+  onMouseOut={(e) => {
+    e.currentTarget.style.backgroundColor = 'transparent';
+    e.currentTarget.style.color = '#007bff';
+  }}
+>
+  Don't have an account? Register here
+</IonButton>
+
 
         {/* Reusable AlertBox Component */}
         <AlertBox message={alertMessage} isOpen={showAlert} onClose={() => setShowAlert(false)} />
