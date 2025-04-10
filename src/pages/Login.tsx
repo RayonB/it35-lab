@@ -94,7 +94,7 @@ const Login: React.FC = () => {
               justifyContent: 'center',
             }}      
             fill="outline"
-            type="Email"
+            type="email"
             placeholder="Email"
             value={email}
             onIonChange={e => setEmail(e.detail.value!)}
