@@ -297,7 +297,7 @@ const EditAccount: React.FC = () => {
                   type="password"
                   labelPlacement="floating"
                   fill="outline"
-                  placeholder="Enter Current Password to Save Changess"
+                  placeholder="Enter Current Password to Save Changes"
                   value={currentPassword}
                   onIonChange={(e) => setCurrentPassword(e.detail.value!)}
                 >
