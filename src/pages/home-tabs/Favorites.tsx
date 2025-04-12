@@ -1,168 +1,94 @@
-import {
-  IonButtons,
-  IonContent,
-  IonHeader,
-  IonMenuButton,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-  IonAccordion,
-  IonAccordionGroup,
-  IonItem,
-  IonLabel,
-  IonIcon
-} from '@ionic/react';
-import {
-  sparkles,
-  heartCircle,
-  trendingUp,
-  sunny,
-  thumbsUp,
-  flame,
-  star,
-  happy,
-  bulb,
-  leaf,
-  rocket,
-  time,
-  flag,
-  walk,
-  trophy
-} from 'ionicons/icons';
 import React from 'react';
+import {
+   IonAccordion,
+   IonAccordionGroup,
+   IonContent,
+   IonHeader,
+  IonItem,
+   IonLabel,
+   IonMenuButton,
+   IonPage,
+   IonTitle,
+   IonToolbar,
+   IonButtons
+} from '@ionic/react';
+import './Favorites.css'; 
 
-const accordionData = [
+const quotes = [
   {
-    value: 'first',
-    icon: sparkles,
-    color: 'primary',
-    title: 'Stay Focused and Keep Going',
-    message: '✨ Focus on progress, not perfection. Every step forward matters.'
+    title: "Stay Focused and Keep Going",
+    message: "✨ Focus on progress, not perfection. Each small step forward is a step towards achieving greatness. You're doing amazing!",
+    color: "primary"
   },
   {
-    value: 'second',
-    icon: heartCircle,
-    color: 'success',
-    title: 'Believe in Yourself',
-    message: '🌱 Trust your journey. You are capable of great things.'
+    title: "Believe in Yourself",
+    message: "🌱 Believe in your potential and strength. Every journey is built one step at a time—keep going!",
+    color: "success"
   },
   {
-    value: 'third',
-    icon: trendingUp,
-    color: 'warning',
-    title: 'Growth Comes from Challenges',
-    message: '💪 Embrace challenges—they’re the path to growth.'
+    title: "Growth Comes from Challenges",
+    message: "💪 Embrace challenges. They are opportunities for growth, not roadblocks.",
+    color: "warning"
   },
   {
-    value: 'fourth',
-    icon: sunny,
-    color: 'tertiary',
-    title: 'Choose Positivity Daily',
-    message: '☀️ Positivity shapes your reality. Find the good every day.'
+    title: "Dream Big",
+    message: "🌠 Don’t limit your dreams. If you can dream it, you can do it.",
+    color: "tertiary"
   },
   {
-    value: 'fifth',
-    icon: thumbsUp,
-    color: 'medium',
-    title: 'Progress Over Perfection',
-    message: '👍 Small consistent steps lead to big results.'
+    title: "Be Consistent",
+    message: "🕒 Success is built on consistency. Small efforts every day lead to big results.",
+    color: "secondary"
   },
   {
-    value: 'sixth',
-    icon: flame,
-    color: 'danger',
-    title: 'Fuel Your Passion',
-    message: '🔥 Passion gives your work energy and direction.'
+    title: "Stay Positive",
+    message: "🌞 Your attitude determines your direction. Stay positive and focused.",
+    color: "success"
   },
   {
-    value: 'seventh',
-    icon: star,
-    color: 'warning',
-    title: 'Shine Bright',
-    message: '🌟 Don’t dim your light. You have something special to offer.'
+    title: "Never Stop Learning",
+    message: "📚 Learning keeps you sharp, humble, and ready for anything.",
+    color: "primary"
   },
   {
-    value: 'eighth',
-    icon: happy,
-    color: 'success',
-    title: 'Happiness is Within',
-    message: '😊 Find joy in the little things and moments of peace.'
+    title: "Celebrate Small Wins",
+    message: "🎉 Every win—big or small—brings you closer to your goals.",
+    color: "warning"
   },
   {
-    value: 'ninth',
-    icon: bulb,
-    color: 'primary',
-    title: 'Think Creatively',
-    message: '💡 Innovative thinking opens doors to new possibilities.'
+    title: "Keep the Vision Clear",
+    message: "🔭 When your vision is clear, the obstacles become easier to overcome.",
+    color: "tertiary"
   },
   {
-    value: 'tenth',
-    icon: leaf,
-    color: 'success',
-    title: 'Grow Steadily',
-    message: '🌿 Every day is a chance to grow stronger and wiser.'
-  },
-  {
-    value: 'eleventh',
-    icon: rocket,
-    color: 'danger',
-    title: 'Launch Your Dreams',
-    message: '🚀 Don’t wait. Take action on your dreams today.'
-  },
-  {
-    value: 'twelfth',
-    icon: time,
-    color: 'medium',
-    title: 'Value Your Time',
-    message: '⏳ Time is precious. Spend it wisely on what matters most.'
-  },
-  {
-    value: 'thirteenth',
-    icon: flag,
-    color: 'warning',
-    title: 'Set Clear Goals',
-    message: '🚩 A goal without a plan is just a wish. Stay focused.'
-  },
-  {
-    value: 'fourteenth',
-    icon: walk,
-    color: 'tertiary',
-    title: 'Keep Moving Forward',
-    message: '🚶‍♂️ No matter how slow you go, you’re still moving forward.'
-  },
-  {
-    value: 'fifteenth',
-    icon: trophy,
-    color: 'primary',
-    title: 'Celebrate Wins',
-    message: '🏆 Acknowledge your progress. Every win matters!'
+    title: "You’ve Got This!",
+    message: "💥 Remind yourself daily: You’re strong, you’re capable, and you’re enough.",
+    color: "secondary"
   }
 ];
 
-const Favorites: React.FC = () => {
+function Favorites() {
   return (
     <IonPage>
-      <IonHeader translucent>
-        <IonToolbar color="primary">
+      <IonHeader>
+        <IonToolbar>
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle className="ion-text-center">Daily Motivation</IonTitle>
+          <IonTitle>Motivational Quotes</IonTitle>
         </IonToolbar>
       </IonHeader>
-
-      <IonContent fullscreen className="ion-padding">
-        <IonAccordionGroup expand="inset">
-          {accordionData.map((item, index) => (
-            <IonAccordion key={index} value={item.value}>
-              <IonItem slot="header" color="light">
-                <IonIcon icon={item.icon} slot="start" color={item.color} />
-                <IonLabel className="ion-text-wrap">
-                  <strong style={{ fontSize: '18px' }}>{item.title}</strong>
+      <IonContent className="favorites-background">
+        <IonAccordionGroup>
+          {quotes.map((quote, index) => (
+            <IonAccordion value={`quote${index}`} key={index}>
+              <IonItem slot="header" color={quote.color}>
+                <IonLabel style={{ fontWeight: 'bold', fontSize: '18px' }}>
+                  {quote.title}
                 </IonLabel>
               </IonItem>
               <div className="ion-padding" slot="content">
-                <p>{item.message}</p>
+                <p>{quote.message}</p>
               </div>
             </IonAccordion>
           ))}
@@ -170,6 +96,6 @@ const Favorites: React.FC = () => {
       </IonContent>
     </IonPage>
   );
-};
+}
 
 export default Favorites;

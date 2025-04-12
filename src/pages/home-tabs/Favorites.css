@@ -1,0 +1,25 @@
+.favorites-background {
+    --background: #eef5a6;
+    padding: 1rem;
+  }
+  
+  ion-accordion {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(211, 133, 133, 0.731);
+    margin-bottom: 12px;
+  }
+  
+  ion-item {
+    --border-radius: 16px;
+    --inner-border-radius: 16px;
+  }
+  
+  .ion-padding {
+    background: #ffffff;
+    border-radius: 0 0 10px 16px;
+    padding: 4px 6px;
+    font-size: 15px;
+    line-height: 1;
+  }
+  
