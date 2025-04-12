@@ -10,6 +10,7 @@ import {
   IonList,
   IonThumbnail,
 } from '@ionic/react';
+import FeedContainer from '../../components/FeedContainer';
 
 function Feed() {
   return (
