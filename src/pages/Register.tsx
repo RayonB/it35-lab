@@ -199,7 +199,7 @@ const Register: React.FC = () => {
         </IonButton>
 
         <IonButton
-          routerLink="/IAS-Project"
+          routerLink="/it35-lab"
           fill="clear"
           shape="round"
           style={{
@@ -266,7 +266,7 @@ const Register: React.FC = () => {
                 <p>Please check your email to verify your account.</p>
               </IonText>
               <IonButton
-                routerLink="/IAS-Project"
+                routerLink="/it35-lab"
                 routerDirection="back"
                 color="success"
                 style={{ marginTop: '20px', borderRadius: '20px' }}
