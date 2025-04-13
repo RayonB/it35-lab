@@ -26,11 +26,6 @@ const quotes = [
     color: "success"
   },
   {
-    title: "Growth Comes from Challenges",
-    message: "💪 Embrace challenges. They are opportunities for growth, not roadblocks.",
-    color: "warning"
-  },
-  {
     title: "Dream Big",
     message: "🌠 Don’t limit your dreams. If you can dream it, you can do it.",
     color: "tertiary"
