@@ -1,55 +1,39 @@
-import React from 'react';
-import {
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
-  IonItem,
-  IonLabel,
-  IonList,
-  IonThumbnail,
+import { 
+  IonButtons,
+    IonContent, 
+    IonHeader, 
+    IonMenuButton, 
+    IonPage, 
+    IonTitle, 
+    IonToolbar 
 } from '@ionic/react';
+import FeedContainer from '../../components/FeedContainer';
 
-function Feed() {
+const Feed: React.FC = () => {
   return (
-    <IonCard>
-      <IonCardHeader>
-        <IonCardTitle>Card Title</IonCardTitle>
-        <IonCardSubtitle>Card Subtitle</IonCardSubtitle>
-      </IonCardHeader>
-      <IonCardContent>
-        <IonList>
-          <IonItem>
-            <IonThumbnail slot="start">
-              <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
-            </IonThumbnail>
-            <IonLabel>Item</IonLabel>
-          </IonItem>
-
-          <IonItem>
-            <IonThumbnail slot="start">
-              <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
-            </IonThumbnail>
-            <IonLabel>Item</IonLabel>
-          </IonItem>
-
-          <IonItem>
-            <IonThumbnail slot="start">
-              <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
-            </IonThumbnail>
-            <IonLabel>Item</IonLabel>
-          </IonItem>
-
-          <IonItem lines="none">
-            <IonThumbnail slot="start">
-              <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/thumbnail.svg" />
-            </IonThumbnail>
-            <IonLabel>Item</IonLabel>
-          </IonItem>
-        </IonList>
-      </IonCardContent>
-    </IonCard>
+    <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonButtons slot='start'>
+            <IonMenuButton></IonMenuButton>
+          </IonButtons>
+          <IonTitle>Feed</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent fullscreen>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '100%',
+          }}
+        >
+          Feed
+        </div>
+        <FeedContainer />
+      </IonContent>
+    </IonPage>
   );
-}
+};
 export default Feed;

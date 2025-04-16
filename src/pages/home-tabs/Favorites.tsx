@@ -1,54 +1,95 @@
-import { 
-  IonButtons,
-    IonContent, 
-    IonHeader, 
-    IonMenuButton, 
-    IonPage, 
-    IonTitle, 
-    IonToolbar,
-    IonAccordion,
-    IonAccordionGroup,
-    IonItem,
-    IonLabel
-} from '@ionic/react';
 import React from 'react';
+import {
+   IonAccordion,
+   IonAccordionGroup,
+   IonContent,
+   IonHeader,
+  IonItem,
+   IonLabel,
+   IonMenuButton,
+   IonPage,
+   IonTitle,
+   IonToolbar,
+   IonButtons
+} from '@ionic/react';
+import './Favorites.css'; 
+
+const quotes = [
+  {
+    title: "Stay Focused and Keep Going",
+    message: "✨ Focus on progress, not perfection. Each small step forward is a step towards achieving greatness. You're doing amazing!",
+    color: "primary"
+  },
+  {
+    title: "Believe in Yourself",
+    message: "🌱 Believe in your potential and strength. Every journey is built one step at a time—keep going!",
+    color: "success"
+  },
+  {
+    title: "Dream Big",
+    message: "🌠 Don’t limit your dreams. If you can dream it, you can do it.",
+    color: "tertiary"
+  },
+  {
+    title: "Be Consistent",
+    message: "🕒 Success is built on consistency. Small efforts every day lead to big results.",
+    color: "secondary"
+  },
+  {
+    title: "Stay Positive",
+    message: "🌞 Your attitude determines your direction. Stay positive and focused.",
+    color: "success"
+  },
+  {
+    title: "Never Stop Learning",
+    message: "📚 Learning keeps you sharp, humble, and ready for anything.",
+    color: "primary"
+  },
+  {
+    title: "Celebrate Small Wins",
+    message: "🎉 Every win—big or small—brings you closer to your goals.",
+    color: "warning"
+  },
+  {
+    title: "Keep the Vision Clear",
+    message: "🔭 When your vision is clear, the obstacles become easier to overcome.",
+    color: "tertiary"
+  },
+  {
+    title: "You’ve Got This!",
+    message: "💥 Remind yourself daily: You’re strong, you’re capable, and you’re enough.",
+    color: "secondary"
+  }
+];
 
 function Favorites() {
   return (
-    <IonAccordionGroup>
-      {/* First Accordion */}
-      <IonAccordion value="first">
-        <IonItem slot="header" color="primary">
-          <IonLabel style={{ fontWeight: 'bold', fontSize: '18px' }}>Stay Focused and Keep Going</IonLabel>
-        </IonItem>
-        <div className="ion-padding" slot="content">
-          <p>✨ Focus on progress, not perfection.
-            Each small step forward is a step towards achieving greatness. Stay focused, keep pushing, and remember that every challenge you face makes you stronger. You're doing amazing!</p>
-        </div>
-      </IonAccordion>
-
-      {/* Second Accordion */}
-      <IonAccordion value="second">
-        <IonItem slot="header" color="success">
-          <IonLabel style={{ fontWeight: 'bold', fontSize: '18px' }}>Believe in Yourself</IonLabel>
-        </IonItem>
-        <div className="ion-padding" slot="content">
-          <p>🌱 Believe in your potential and strength.
-            You have everything within you to succeed. Don't be afraid to dream big and follow your passions. Every journey is built one step at a time—keep going!</p>
-        </div>
-      </IonAccordion>
-
-      {/* Third Accordion */}
-      <IonAccordion value="third">
-        <IonItem slot="header" color="warning">
-          <IonLabel style={{ fontWeight: 'bold', fontSize: '18px' }}>Growth Comes from Challenges</IonLabel>
-        </IonItem>
-        <div className="ion-padding" slot="content">
-          <p>💪 Embrace the challenges.
-            Growth happens when you push yourself out of your comfort zone. Challenges are not roadblocks—they are opportunities for growth. Keep facing them, and you'll find success on the other side!</p>
-        </div>
-      </IonAccordion>
-    </IonAccordionGroup>
+    <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonButtons slot="start">
+            <IonMenuButton />
+          </IonButtons>
+          <IonTitle>Motivational Quotes</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent className="favorites-background">
+        <IonAccordionGroup>
+          {quotes.map((quote, index) => (
+            <IonAccordion value={`quote${index}`} key={index}>
+              <IonItem slot="header" color={quote.color}>
+                <IonLabel style={{ fontWeight: 'bold', fontSize: '18px' }}>
+                  {quote.title}
+                </IonLabel>
+              </IonItem>
+              <div className="ion-padding" slot="content">
+                <p>{quote.message}</p>
+              </div>
+            </IonAccordion>
+          ))}
+        </IonAccordionGroup>
+      </IonContent>
+    </IonPage>
   );
 }
 

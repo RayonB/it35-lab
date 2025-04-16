@@ -1,40 +1,36 @@
-import { 
-    IonButtons,
-      IonContent, 
-      IonHeader, 
-      IonMenuButton, 
-      IonPage, 
-      IonTitle, 
-      IonToolbar 
-  } from '@ionic/react';
-  
-  const Search: React.FC = () => {
-    return (
-      <IonPage>
-        <IonHeader>
-          <IonToolbar>
-            <IonButtons slot='start'>
-              <IonMenuButton></IonMenuButton>
-            </IonButtons>
-            <IonTitle>Search</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <IonContent fullscreen>
+import React from 'react';
+import { IonLabel, IonSegment, IonSegmentButton, IonSegmentContent, IonSegmentView } from '@ionic/react';
+import './Search.css';
 
-        <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '100%',
-        }}
-        >
-          Search
-        </div>
+function Search() {
+  return (
+    <>
+      <IonSegment value="first">
+        <IonSegmentButton value="first" contentId="first">
+          <IonLabel>First</IonLabel>
+        </IonSegmentButton>
+        <IonSegmentButton value="second" contentId="second">
+          <IonLabel>Second</IonLabel>
+        </IonSegmentButton>
+        <IonSegmentButton value="third" contentId="third">
+          <IonLabel>Third</IonLabel>
+        </IonSegmentButton>
+        <IonSegmentButton value="fourth" contentId="fourth">
+          <IonLabel>Fourth</IonLabel>
+        </IonSegmentButton>
+        <IonSegmentButton value="fifth" contentId="fifth">
+          <IonLabel>Fifth</IonLabel>
+        </IonSegmentButton>
+      </IonSegment>
+      <IonSegmentView>
+        <IonSegmentContent id="first">"The only way to do great work is to love what you do." – Steve Jobs</IonSegmentContent>
+        <IonSegmentContent id="second">"Success is not the key to happiness. Happiness is the key to success." – Albert Schweitzer</IonSegmentContent>
+        <IonSegmentContent id="third">"Your time is limited, so don’t waste it living someone else’s life." – Steve Jobs</IonSegmentContent>
+        <IonSegmentContent id="fourth">"The future belongs to those who believe in the beauty of their dreams." – Eleanor Roosevelt</IonSegmentContent>
+        <IonSegmentContent id="fifth">"It always seems impossible until it’s done." – Nelson Mandela</IonSegmentContent>
+      </IonSegmentView>
+    </>
+  );
+}
 
-        </IonContent>
-      </IonPage>
-    );
-  };
-  
-  export default Search;
+export default Search;
