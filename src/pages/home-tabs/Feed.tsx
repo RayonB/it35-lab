@@ -1,11 +1,11 @@
-import { 
+import {
   IonButtons,
-  IonContent, 
-  IonHeader, 
-  IonMenuButton, 
-  IonPage, 
-  IonTitle, 
-  IonToolbar 
+  IonContent,
+  IonHeader,
+  IonMenuButton,
+  IonPage,
+  IonTitle,
+  IonToolbar
 } from '@ionic/react';
 import FeedContainer from '../../components/FeedContainer';
 
@@ -14,8 +14,8 @@ const Feed: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonButtons slot='start'>
-            <IonMenuButton></IonMenuButton>
+          <IonButtons slot="start">
+            <IonMenuButton />
           </IonButtons>
           <IonTitle>Feed</IonTitle>
         </IonToolbar>
@@ -23,7 +23,7 @@ const Feed: React.FC = () => {
       <IonContent
         fullscreen
         style={{
-          background: 'linear-gradient(135deg,rgb(229, 214, 164) 0%, #fda085 100%)',
+          background: 'linear-gradient(to right top, #fbc2eb, #a6c1ee)',
         }}
       >
         <div
@@ -33,8 +33,8 @@ const Feed: React.FC = () => {
             justifyContent: 'center',
             height: '100%',
             color: '#fff',
-            fontSize: '1.5rem',
-            fontWeight: 'bold'
+            fontSize: '2rem',
+            fontWeight: 'bold',
           }}
         >
           Feed
@@ -44,5 +44,5 @@ const Feed: React.FC = () => {
     </IonPage>
   );
 };
- 
+
 export default Feed;
