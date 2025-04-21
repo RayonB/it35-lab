@@ -1,5 +1,10 @@
 import { useState, useEffect } from 'react';
-import { IonApp, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonInput, IonLabel, IonModal, IonFooter, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonAlert, IonText } from '@ionic/react';
+import {
+  IonApp, IonContent, IonHeader, IonPage, IonTitle, IonToolbar,
+  IonButton, IonInput, IonLabel, IonModal, IonFooter, IonCard,
+  IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle,
+  IonAlert, IonText
+} from '@ionic/react';
 import { User } from '@supabase/supabase-js';
 import { supabase } from '../../utils/supabaseClient';
 
@@ -12,7 +17,7 @@ interface Post {
   post_updated_at: string;
 }
 
-const FeedContainer = () => {
+const FeedContainer: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [postContent, setPostContent] = useState('');
   const [editingPost, setEditingPost] = useState<Post | null>(null);
@@ -22,34 +27,47 @@ const FeedContainer = () => {
   const [isAlertOpen, setIsAlertOpen] = useState(false);
 
   useEffect(() => {
-    const fetchUser = async () => {
+    const fetchUserAndPosts = async () => {
       const { data: authData } = await supabase.auth.getUser();
-      if (authData?.user?.email?.endsWith('@nbsc.edu.ph')) {
-        setUser(authData.user);
+      const email = authData?.user?.email;
+
+      // Allow users with Gmail or nbsc.edu.ph domains
+      if (email && /@(gmail\.com|nbsc\.edu\.ph)$/.test(email)) {
         const { data: userData, error } = await supabase
           .from('users')
           .select('user_id, username')
-          .eq('user_email', authData.user.email)
+          .eq('user_email', email)
           .single();
-        if (!error && userData) {
-          setUser({ ...authData.user, id: userData.user_id });
+
+        if (!error && userData && authData?.user) {
+          setUser({ ...authData.user, id: userData.user_id } as User);
           setUsername(userData.username);
         }
       }
+
+      const { data: postData, error: postError } = await supabase
+        .from('posts')
+        .select('*')
+        .order('post_created_at', { ascending: false });
+
+      if (!postError && postData) setPosts(postData as Post[]);
     };
-    const fetchPosts = async () => {
-      const { data, error } = await supabase.from('posts').select('*').order('post_created_at', { ascending: false });
-      if (!error) setPosts(data as Post[]);
-    };
-    fetchUser();
-    fetchPosts();
+
+    fetchUserAndPosts();
   }, []);
 
   const createPost = async () => {
     if (!postContent || !user || !username) return;
-    const { data, error } = await supabase.from('posts').insert([{ post_content: postContent, user_id: user.id, username }]).select('*');
-    if (!error && data) setPosts([data[0] as Post, ...posts]);
-    setPostContent('');
+
+    const { data, error } = await supabase
+      .from('posts')
+      .insert([{ post_content: postContent, user_id: (user as any).id, username }])
+      .select('*');
+
+    if (!error && data) {
+      setPosts([data[0] as Post, ...posts]);
+      setPostContent('');
+    }
   };
 
   const deletePost = async (post_id: string) => {
@@ -65,14 +83,16 @@ const FeedContainer = () => {
 
   const savePost = async () => {
     if (!postContent || !editingPost) return;
+
     const { data, error } = await supabase
       .from('posts')
       .update({ post_content: postContent })
       .match({ post_id: editingPost.post_id })
       .select('*');
+
     if (!error && data) {
-      const updatedPost = data[0] as Post;
-      setPosts(posts.map(post => (post.post_id === updatedPost.post_id ? updatedPost : post)));
+      const updated = data[0] as Post;
+      setPosts(posts.map(p => (p.post_id === updated.post_id ? updated : p)));
       setPostContent('');
       setEditingPost(null);
       setIsModalOpen(false);
@@ -96,7 +116,11 @@ const FeedContainer = () => {
                   <IonCardTitle>Create Post</IonCardTitle>
                 </IonCardHeader>
                 <IonCardContent>
-                  <IonInput value={postContent} onIonChange={e => setPostContent(e.detail.value!)} placeholder="Write a post..." />
+                  <IonInput
+                    value={postContent}
+                    onIonChange={e => setPostContent(e.detail.value!)}
+                    placeholder="Write a post..."
+                  />
                   <IonButton onClick={createPost}>Post</IonButton>
                 </IonCardContent>
               </IonCard>
@@ -105,13 +129,15 @@ const FeedContainer = () => {
                 <IonCard key={post.post_id}>
                   <IonCardHeader>
                     <IonCardTitle>{post.username}</IonCardTitle>
-                    <IonCardSubtitle>{new Date(post.post_created_at).toLocaleString()}</IonCardSubtitle>
+                    <IonCardSubtitle>
+                      {new Date(post.post_created_at).toLocaleString()}
+                    </IonCardSubtitle>
                   </IonCardHeader>
-                 <IonCardContent>
-                 <IonText color="secondary">
-                    <h1>{post.post_content}</h1>
-                  </IonText>
-                 </IonCardContent>
+                  <IonCardContent>
+                    <IonText color="secondary">
+                      <h1>{post.post_content}</h1>
+                    </IonText>
+                  </IonCardContent>
                   <IonFooter>
                     <IonButton fill="clear" onClick={() => startEditingPost(post)}>Edit</IonButton>
                     <IonButton fill="clear" color="danger" onClick={() => deletePost(post.post_id)}>Delete</IonButton>
@@ -131,7 +157,11 @@ const FeedContainer = () => {
             </IonToolbar>
           </IonHeader>
           <IonContent>
-            <IonInput value={postContent} onIonChange={e => setPostContent(e.detail.value!)} placeholder="Edit your post..." />
+            <IonInput
+              value={postContent}
+              onIonChange={e => setPostContent(e.detail.value!)}
+              placeholder="Edit your post..."
+            />
           </IonContent>
           <IonFooter>
             <IonButton onClick={savePost}>Save</IonButton>
