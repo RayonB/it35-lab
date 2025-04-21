@@ -118,7 +118,7 @@ const Login: React.FC = () => {
           <h2 style={{ fontWeight: 'bold', fontSize: '22px', marginBottom: '25px', color: '#333' }}>
             Welcome Back
           </h2>
-
+  
           <IonInput
             label="Email"
             labelPlacement="floating"

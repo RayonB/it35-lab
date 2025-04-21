@@ -29,7 +29,7 @@ import {
       {name:'Search', tab:'search', url: '/it35-lab/app/home/search', icon: search},
       {name:'Favorites',tab:'favorites', url: '/it35-lab/app/home/favorites', icon: star},
       ]
-
+    
     
 return (
   <IonReactRouter>

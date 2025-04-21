@@ -1,16 +1,16 @@
 import React from 'react';
 import {
-  IonButtons,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardTitle,
-  IonContent,
-  IonHeader,
-  IonMenuButton,
-  IonPage,
-  IonTitle,
-  IonToolbar
+    IonButtons,
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonCardTitle,
+    IonContent,
+    IonHeader,
+    IonMenuButton,
+    IonPage,
+    IonTitle,
+    IonToolbar
 } from '@ionic/react';
 
 const Search: React.FC = () => {

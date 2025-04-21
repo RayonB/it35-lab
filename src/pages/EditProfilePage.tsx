@@ -201,7 +201,7 @@ import React, { useState, useRef, useEffect } from 'react';
                  <IonButton expand="block" onClick={() => fileInputRef.current?.click()}>
                    Upload Avatar
                  </IonButton>
-               </IonCol>
+               </IonCol>   
              </IonRow>
            </IonGrid>
    
