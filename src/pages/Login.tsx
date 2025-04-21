@@ -13,6 +13,7 @@ import {
 import { logoIonic } from 'ionicons/icons';
 import { useState } from 'react';
 import { supabase } from '../../utils/supabaseClient';
+import './Login.css';
 
 const AlertBox: React.FC<{ message: string; isOpen: boolean; onClose: () => void }> = ({ message, isOpen, onClose }) => {
   return (
