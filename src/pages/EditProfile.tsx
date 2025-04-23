@@ -7,7 +7,7 @@ import {
 import { supabase } from '../../utils/supabaseClient';
 import { useHistory } from 'react-router-dom';
 
-const editProfile: React.FC = () => {
+const EditAccount: React.FC = () => {
     const [email, setEmail] = useState('');
     const [currentPassword, setCurrentPassword] = useState('');
     const [password, setPassword] = useState('');
@@ -323,4 +323,4 @@ const editProfile: React.FC = () => {
     );
   };
   
-  export default editProfile;
+  export default EditAccount;
