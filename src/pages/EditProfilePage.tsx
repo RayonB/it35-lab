@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
    IonBackButton, IonButtons, IonItem, IonText, IonCol, IonGrid,
    IonRow, IonInputPasswordToggle, IonImg, IonAvatar,
  } from '@ionic/react';
- import { supabase } from '../../utils/supabaseClient';
+ import { supabase } from '../utils/supabaseClient';
  import { useHistory } from 'react-router-dom';
  
  const editProfile: React.FC = () => {
