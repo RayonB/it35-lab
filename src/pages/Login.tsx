@@ -1,20 +1,21 @@
-import { 
-  IonAlert,
-  IonAvatar,
-  IonButton,
-  IonContent, 
-  IonIcon, 
-  IonInput, 
-  IonInputPasswordToggle,  
-  IonPage,  
-  IonToast,  
-  useIonRouter
-} from '@ionic/react';
-import { logoIonic } from 'ionicons/icons';
-import { useState } from 'react';
-import { supabase } from '../../utils/supabaseClient';
+import {
+    IonAlert,
+    IonButton,
+    IonContent,
+    IonInput,
+    IonInputPasswordToggle,
+    IonPage,
+    IonToast,
+    useIonRouter,
+ } from '@ionic/react';
+ import { useState } from 'react';
+ import { supabase } from '../utils/supabaseClient';
 
-const AlertBox: React.FC<{ message: string; isOpen: boolean; onClose: () => void }> = ({ message, isOpen, onClose }) => {
+const AlertBox: React.FC<{ message: string; isOpen: boolean; onClose: () => void }> = ({
+  message,
+  isOpen,
+  onClose,
+}) => {
   return (
     <IonAlert
       isOpen={isOpen}
@@ -43,138 +44,133 @@ const Login: React.FC = () => {
       return;
     }
 
-    setShowToast(true); 
+    setShowToast(true);
     setTimeout(() => {
       navigation.push('/it35-lab/app', 'forward', 'replace');
     }, 300);
   };
-  
+
   return (
     <IonPage>
-      <IonContent className='ion-padding'>
-        <div style={{
-          display: 'flex',
-          flexDirection:'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          marginTop:'2%'
-        }}>
-          <IonAvatar
+      <IonContent fullscreen className="ion-padding" scrollY={false}>
+        {/* Background Gradient and SVG */}
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(135deg, #f8bbd0, #fce4ec)',
+            zIndex: 0,
+            overflow: 'hidden',
+          }}
+        >
+          <svg
+            viewBox="0 0 1440 320"
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '100px',
-              height: '100px',
-              borderRadius: '50%', 
-              overflow: 'hidden' 
+              position: 'absolute',
+              bottom: 0,
+              width: '100%',
+              height: 'auto',
+              zIndex: 1,
             }}
           >
-            <IonIcon 
-              icon={logoIonic}
-              color='primary'
-              style={{ 
-                fontSize: '150px', color: '#33f508' 
-              }} 
-            />
-          </IonAvatar>
-          <h1 style={{
-      marginTop:'20px',
-      display: 'flex',
-      width: '100%',
-      alignItems: 'center', 
-      justifyContent: 'center',
-          }}>
-            USER LOGIN</h1>
-          <IonInput style={{
-              marginTop:'15px',
-              display: 'flex',
-              width: '80%',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}      
+            <path
+              fill="#ffffff"
+              fillOpacity="1"
+              d="M0,224L40,202.7C80,181,160,139,240,122.7C320,107,400,117,480,144C560,171,640,213,720,229.3C800,245,880,235,960,202.7C1040,171,1120,117,1200,96C1280,75,1360,85,1400,90.7L1440,96L1440,320L0,320Z"
+            ></path>
+          </svg>
+        </div>
+
+        {/* Login Card */}
+        <div
+          style={{
+            position: 'relative',
+            zIndex: 2,
+            width: '100%',
+            maxWidth: '400px',
+            backgroundColor: 'white',
+            padding: '30px 20px',
+            borderRadius: '20px',
+            margin: 'auto',
+            marginTop: '10vh',
+            boxShadow: '0 15px 35px rgba(0, 0, 0, 0.2)',
+            textAlign: 'center',
+          }}
+        >
+          {/* Emoji Smiley */}
+          <div
+            style={{
+               margin: '0 auto 20px',
+               width: '80px',
+               height: '80px',
+               backgroundColor: '#ffecb3',
+               borderRadius: '50%',
+               fontSize: '40px',
+               display: 'flex',
+               alignItems: 'center',
+               justifyContent: 'center',
+               boxShadow: '0 5px 10px rgba(0,0,0,0.1)',
+            }}
+          >
+            😊
+          </div>
+
+          <h2 style={{ fontWeight: 'bold', fontSize: '22px', marginBottom: '25px', color: '#333' }}>
+            Welcome Back
+          </h2>
+  
+          <IonInput
+            label="Email"
+            labelPlacement="floating"
             fill="outline"
             type="email"
-            placeholder="Email"
+            placeholder="Enter your email"
             value={email}
-            onIonChange={e => setEmail(e.detail.value!)}
+            onIonChange={(e) => setEmail(e.detail.value!)}
+            style={{ marginBottom: '15px' }}
           />
-          <IonInput style={{
-              marginTop:'15px',
-              display: 'flex',
-              width: '80%',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}      
+
+          <IonInput
+            label="Password"
+            labelPlacement="floating"
             fill="outline"
             type="password"
-            placeholder="Password"
+            placeholder="Enter your password"
             value={password}
-            onIonChange={e => setPassword(e.detail.value!)}
+            onIonChange={(e) => setPassword(e.detail.value!)}
+            style={{ marginBottom: '20px' }}
           >
-            <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
+            <IonInputPasswordToggle slot="end" />
           </IonInput>
+
+          <IonButton expand="block" shape="round" onClick={doLogin} style={{ marginBottom: '15px' }}>
+            Login
+          </IonButton>
+
+          <IonButton
+            routerLink="/it35-lab/Register"
+            fill="clear"
+            size="small"
+            shape="round"
+            style={{
+              textTransform: 'none',
+              color: '#3880ff',
+              fontWeight: 500,
+            }}
+          >
+            Don’t have an account?&nbsp;<strong>Register here</strong>
+          </IonButton>
         </div>
-        <IonButton
-  onClick={doLogin}
-  shape="round"
-  style={{
-    display: 'block',
-    margin: '20px auto', 
-    width: '70%',        
-    fontSize: '16px',
-    fontWeight: '800',
-    fontFamily: 'Arial, sans-serif',
-    color: 'white',
-    borderRadius: '100px',
-  }}
->
-  Login
-</IonButton>
 
-<IonButton
-  routerLink="/it35-lab/Register"
-  fill="clear"
-  shape="round"
-  style={{
-    display: 'block',
-    margin: '20px auto',
-    width: '50%',
-    fontSize: '15px',
-    fontWeight: '500',
-    fontFamily: 'Arial, sans-serif',
-    color: '#007bff',
-    border: '1.5px solid #007bff',
-    borderRadius: '25px',
-    backgroundColor: 'transparent',
-    textTransform: 'none',
-    transition: 'all 0.3s ease',
-    boxShadow: '0 2px 6px rgba(0, 123, 255, 0.15)'
-  }}
-  onMouseOver={(e) => {
-    e.currentTarget.style.backgroundColor = '#007bff';
-    e.currentTarget.style.color = '#fff';
-  }}
-  onMouseOut={(e) => {
-    e.currentTarget.style.backgroundColor = 'transparent';
-    e.currentTarget.style.color = '#007bff';
-  }}
->
-  Don't have an account? Register here
-</IonButton>
-
-
-        {/* Reusable AlertBox Component */}
-        <AlertBox message={alertMessage} isOpen={showAlert} onClose={() => setShowAlert(false)} />
-
-        {/* IonToast for success message */}
-        <IonToast
-          isOpen={showToast}
-          onDidDismiss={() => setShowToast(false)}
-          message="Login successful! Redirecting..."
-          duration={1500}
-          position="top"
-          color="primary"
+        {/* Alert & Toast */}
+         <AlertBox message={alertMessage} isOpen={showAlert} onClose={() => setShowAlert(false)} />
+         <IonToast
+             isOpen={showToast}
+             onDidDismiss={() => setShowToast(false)}
+             message="Login successful! Redirecting..."
+             duration={1500}
+             position="top"
+             color="primary"
         />
       </IonContent>
     </IonPage>
