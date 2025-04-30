@@ -12,7 +12,8 @@ const EditAccount: React.FC = () => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [Name, setName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [username, setUsername] = useState('');
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
@@ -23,36 +24,33 @@ const EditAccount: React.FC = () => {
 
   useEffect(() => {
     const fetchSessionAndData = async () => {
-      // Fetch the current session
       const { data: session, error: sessionError } = await supabase.auth.getSession();
-  
       if (sessionError || !session || !session.session) {
         setAlertMessage('You must be logged in to access this page.');
         setShowAlert(true);
-        history.push('/it35-lab/login'); // Redirect to login if no session is found
+        history.push('/it35-lab/login');
         return;
       }
-  
-      // Fetch user details from Supabase using the session's email
+
       const { data: user, error: userError } = await supabase
         .from('users')
-        .select('user_name, user_avatar_url, user_email, username')
-        .eq('user_email', session.session.user.email) // Use email from the session
+        .select('user_firstname, user_lastname, user_avatar_url, user_email, username')
+        .eq('user_email', session.session.user.email)
         .single();
-  
+
       if (userError || !user) {
         setAlertMessage('User data not found.');
         setShowAlert(true);
         return;
       }
-  
-      // Populate form fields with the retrieved data
-      setName(user.user_name || '');
+
+      setFirstName(user.user_firstname || '');
+      setLastName(user.user_lastname || '');
       setAvatarPreview(user.user_avatar_url);
       setEmail(user.user_email);
       setUsername(user.username || '');
     };
-  
+
     fetchSessionAndData();
   }, [history]);
 
@@ -71,9 +69,7 @@ const EditAccount: React.FC = () => {
       return;
     }
 
-    // Fetch the current session
     const { data: session, error: sessionError } = await supabase.auth.getSession();
-
     if (sessionError || !session || !session.session) {
       setAlertMessage('Error fetching session or no session available.');
       setShowAlert(true);
@@ -87,7 +83,7 @@ const EditAccount: React.FC = () => {
       setShowAlert(true);
       return;
     }
-    
+
     const { error: passwordError } = await supabase.auth.signInWithPassword({
       email: user.email,
       password: currentPassword,
@@ -99,18 +95,18 @@ const EditAccount: React.FC = () => {
       return;
     }
 
-    // Handle avatar upload if the avatar file is changed
     let avatarUrl = avatarPreview;
 
     if (avatarFile) {
       const fileExt = avatarFile.name.split('.').pop();
       const fileName = `${Date.now()}.${fileExt}`;
-      const filePath = `avatars/${fileName}`;  
+      const filePath = `avatars/${fileName}`;
+
       const { data: uploadData, error: uploadError } = await supabase.storage
         .from('user-avatars')
         .upload(filePath, avatarFile, {
           cacheControl: '3600',
-          upsert: true,  // Allows overwriting existing files
+          upsert: true,
         });
 
       if (uploadError) {
@@ -119,16 +115,15 @@ const EditAccount: React.FC = () => {
         return;
       }
 
-      // Retrieve the public URL
       const { data } = supabase.storage.from('user-avatars').getPublicUrl(filePath);
       avatarUrl = data.publicUrl;
     }
 
-    // Update user data in the users table
     const { error: updateError } = await supabase
       .from('users')
       .update({
-        user_name: Name,
+        user_firstname: firstName,
+        user_lastname: lastName,
         user_avatar_url: avatarUrl,
         username: username,
       })
@@ -140,7 +135,6 @@ const EditAccount: React.FC = () => {
       return;
     }
 
-    // Update the password if a new password is provided
     if (password) {
       const { error: passwordUpdateError } = await supabase.auth.updateUser({
         password: password,
@@ -165,11 +159,20 @@ const EditAccount: React.FC = () => {
           <IonBackButton defaultHref="/it35-lab/app" />
         </IonButtons>
       </IonHeader>
-      <IonContent className="ion-padding">
-        <IonCard>
+      <IonContent 
+        className="ion-padding" 
+        style={{
+          backgroundImage: 'url(https://your-background-image-url.com)', 
+          backgroundSize: 'cover', 
+          backgroundPosition: 'center', 
+          backgroundAttachment: 'fixed',
+          color: '#fff'
+        }}
+      >
+        <IonCard className="ion-padding" style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)' }}>
           <IonCardContent>
-            <IonText color="secondary">
-              <h1>Edit Account</h1>
+            <IonText color="primary">
+              <h2>Edit Account</h2>
             </IonText>
 
             {/* Avatar Upload Section */}
@@ -188,7 +191,7 @@ const EditAccount: React.FC = () => {
                     accept="image/*"
                     onChange={handleAvatarChange}
                   />
-                  <IonButton expand="block" onClick={() => fileInputRef.current?.click()} shape="round">
+                  <IonButton expand="block" onClick={() => fileInputRef.current?.click()} shape="round" color="secondary">
                     Upload Avatar
                   </IonButton>
                 </IonCol>
@@ -212,15 +215,26 @@ const EditAccount: React.FC = () => {
               </IonRow>
 
               <IonRow>
-                <IonCol size="12">
+                <IonCol size="6">
                   <IonInput
-                    label="Name"
+                    label="First Name"
                     type="text"
                     labelPlacement="floating"
                     fill="outline"
-                    placeholder="Enter Name"
-                    value={Name}
-                    onIonChange={(e) => setName(e.detail.value!)}
+                    placeholder="Enter First Name"
+                    value={firstName}
+                    onIonChange={(e) => setFirstName(e.detail.value!)}
+                  />
+                </IonCol>
+                <IonCol size="6">
+                  <IonInput
+                    label="Last Name"
+                    type="text"
+                    labelPlacement="floating"
+                    fill="outline"
+                    placeholder="Enter Last Name"
+                    value={lastName}
+                    onIonChange={(e) => setLastName(e.detail.value!)}
                   />
                 </IonCol>
               </IonRow>
@@ -229,10 +243,10 @@ const EditAccount: React.FC = () => {
             {/* Password Fields */}
             <IonGrid>
               <IonRow>
-                <IonText color="secondary">
-                  <h3>Change Password</h3>
-                </IonText>
                 <IonCol size="12">
+                  <IonText color="secondary">
+                    <h4>Change Password</h4>
+                  </IonText>
                   <IonInput
                     label="New Password"
                     type="password"
@@ -246,9 +260,7 @@ const EditAccount: React.FC = () => {
                   </IonInput>
                 </IonCol>
               </IonRow>
-            </IonGrid>
 
-            <IonGrid>
               <IonRow>
                 <IonCol size="12">
                   <IonInput
@@ -270,7 +282,7 @@ const EditAccount: React.FC = () => {
             <IonGrid>
               <IonRow>
                 <IonText color="secondary">
-                  <h3>Confirm Changes</h3>
+                  <h4>Confirm Changes</h4>
                 </IonText>
                 <IonCol size="12">
                   <IonInput
@@ -278,7 +290,7 @@ const EditAccount: React.FC = () => {
                     type="password"
                     labelPlacement="floating"
                     fill="outline"
-                    placeholder="Enter Current Password to Save Changes"
+                    placeholder="Enter Current Password"
                     value={currentPassword}
                     onIonChange={(e) => setCurrentPassword(e.detail.value!)}
                   >
@@ -289,13 +301,12 @@ const EditAccount: React.FC = () => {
             </IonGrid>
 
             {/* Update Button */}
-            <IonButton expand="full" onClick={handleUpdate} shape="round">
+            <IonButton expand="full" onClick={handleUpdate} shape="round" color="primary">
               Update Account
             </IonButton>
           </IonCardContent>
         </IonCard>
 
-        {/* Alert for success or errors */}
         <IonAlert
           isOpen={showAlert}
           onDidDismiss={() => setShowAlert(false)}
