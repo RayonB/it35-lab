@@ -18,20 +18,21 @@ import {
 } from '@ionic/react';
 import { supabase } from '../utils/supabaseClient';
 import bcrypt from 'bcryptjs';
- 
-const AlertBox: React.FC<{ message: string; isOpen: boolean; onClose: () => void }> = ({ message, isOpen, onClose }) => {
-  return (
-    <IonAlert
-      isOpen={isOpen}
-      onDidDismiss={onClose}
-      header="Notification"
-      message={message}
-      buttons={['OK']}
-    />
-  );
-};
 
+// AlertBox Component
+const AlertBox: React.FC<{ message: string; isOpen: boolean; onClose: () => void }> = ({ message, isOpen, onClose }) => (
+  <IonAlert
+    isOpen={isOpen}
+    onDidDismiss={onClose}
+    header="Notification"
+    message={message}
+    buttons={['OK']}
+  />
+);
+
+// Register Component
 const Register: React.FC = () => {
+  // State variables
   const [username, setUsername] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -43,6 +44,7 @@ const Register: React.FC = () => {
   const [alertMessage, setAlertMessage] = useState('');
   const [showAlert, setShowAlert] = useState(false);
 
+  // Open Verification Modal
   const handleOpenVerificationModal = () => {
     if (!email.endsWith('@nbsc.edu.ph') && !email.endsWith('@gmail.com')) {
       alert('Any account can register.');
@@ -55,6 +57,7 @@ const Register: React.FC = () => {
     setShowVerificationModal(true);
   };
 
+  // Register function
   const doRegister = async () => {
     setShowVerificationModal(false);
     try {
@@ -80,6 +83,7 @@ const Register: React.FC = () => {
     }
   };
 
+  // Input styling
   const inputStyle = {
     margin: '10px auto',
     width: '100%',
@@ -90,106 +94,128 @@ const Register: React.FC = () => {
     color: '#333',
     padding: '12px 20px',
     backgroundColor: '#fff',
-   };
+  };
+
+  // Style for the input containers
+  const inputContainerStyle = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    gap: '20px',
+  };
 
   return (
     <IonPage>
-      <IonContent
-        fullscreen
-        className="ion-padding"
-        style={{
-          position: 'relative',
-          overflow: 'hidden',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          minHeight: '100vh',
-          padding: 0,
-          animation: 'fadeSlideIn 1s ease-in-out forwards',
-        }}
-      >
+      <IonContent fullscreen className="ion-padding" style={{ position: 'relative', overflow: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', padding: 0 }}>
         <style>
           {`
             @keyframes fadeSlideIn {
               0% { opacity: 0; transform: translateY(20px); }
               100% { opacity: 1; transform: translateY(0); }
             }
+
+            @keyframes floatingCircles {
+              0% { transform: scale(0.7); }
+              50% { transform: scale(1); }
+              100% { transform: scale(0.7); }
+            }
+
+            .bg-circles {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              z-index: -1;
+            }
+
             .bg-circles::before, .bg-circles::after {
               content: '';
               position: absolute;
               border-radius: 50%;
               opacity: 0.4;
-              z-index: 0;
+              animation: floatingCircles 4s ease-in-out infinite;
             }
+
             .bg-circles::before {
               width: 400px;
               height: 400px;
-              background: radial-gradient(circle, #f8bbd0,rgb(112, 59, 76));
-              top: -100px;
-              left: -100px;
+              background: radial-gradient(circle, #f8bbd0, rgb(112, 59, 76));
+              top: -150px;
+              left: -150px;
+              animation-delay: 0s;
             }
+
             .bg-circles::after {
               width: 500px;
               height: 500px;
-              background: radial-gradient(circle,rgb(58, 111, 58),rgb(80, 215, 63));
-              bottom: -150px;
-              right: -150px;
+              background: radial-gradient(circle, rgb(58, 111, 58), rgb(80, 215, 63));
+              bottom: -200px;
+              right: -200px;
+              animation-delay: 2s;
+            }
+
+            .background {
+              background: linear-gradient(135deg, rgba(56, 173, 169, 0.9), rgba(0, 122, 255, 0.9));
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              z-index: -1;
+              filter: blur(10px);
+              animation: fadeSlideIn 1.5s ease-in-out forwards;
+            }
+
+            .form-container {
+              position: relative;
+              z-index: 1;
+              background-color: rgba(255, 255, 255, 0.9);
+              padding: 30px;
+              border-radius: 30px;
+              box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+              text-align: center;
             }
           `}
         </style>
 
-        <div className="bg-circles" style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', minHeight: '100vh' }}>
-          <div
-            style={{
-              width: '80%',
-              maxWidth: '1000px',
-              padding: '30px',
-              borderRadius: '30px',
-              backgroundColor: 'rgba(255,255,255,0.95)',
-              boxShadow: '0 15px 30px rgba(0,0,0,0.1)',
-              textAlign: 'center',
-              zIndex: 1,
-            }}
-          >
-            <IonAvatar style={{
-              margin: '0 auto 15px',
-              width: '90px',
-              height: '90px',
-              border: '3px solid #38ada9',
-              boxShadow: '0 4px 15px rgba(0,0,0,0.15)',
-              backgroundColor: '#fff',
-              overflow: 'hidden',
-            }}>
-              <img
-                src="https://imgs.search.brave.com/pxnzAhmuJM_a7-izXftOxly9xG-j_HkGLrn5JGcqXBo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/cHJlbWl1bS12ZWN0/b3IvYmlnLXNtaWxl/LWVtb3RpY29uXzEz/MDM4NzAtMTIuanBn/P3NlbXQ9YWlzX2h5/YnJpZA"
-                alt="Smiling Avatar"
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              />
-            </IonAvatar>
+        {/* Background effects */}
+        <div className="background"></div>
+        <div className="bg-circles"></div>
 
-            <h1 style={{ fontSize: '26px', fontWeight: 'bold', color: '#333' }}>
-              Create your account
-            </h1>
+        <div className="form-container">
+          <IonAvatar style={{ margin: '0 auto 15px', width: '90px', height: '90px', border: '3px solid #38ada9', boxShadow: '0 4px 15px rgba(0,0,0,0.15)', backgroundColor: '#fff', overflow: 'hidden' }}>
+            <img src="https://imgs.search.brave.com/pxnzAhmuJM_a7-izXftOxly9xG-j_HkGLrn5JGcqXBo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/cHJlbWl1bS12ZWN0/b3IvYmlnLXNtaWxl/LWVtb3RpY29uXzEz/MDM4NzAtMTIuanBn/P3NlbXQ9YWlzX2h5/YnJpZA" alt="Smiling Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          </IonAvatar>
 
-            <IonInput style={inputStyle} label="Username" labelPlacement="floating" fill="outline" type="text" placeholder="Enter a unique username" value={username} onIonChange={e => setUsername(e.detail.value!)} />
-            <IonInput style={inputStyle} label="First Name" labelPlacement="floating" fill="outline" type="text" placeholder="Input your name" value={firstName} onIonChange={e => setFirstName(e.detail.value!)} />
-            <IonInput style={inputStyle} label="Last Name" labelPlacement="floating" fill="outline" type="text" placeholder="Input your surname" value={lastName} onIonChange={e => setLastName(e.detail.value!)} />
-            <IonInput style={inputStyle} label="Email" labelPlacement="floating" fill="outline" type="email" placeholder="Any Email" value={email} onIonChange={e => setEmail(e.detail.value!)} />
-            <IonInput style={inputStyle} label="Password" labelPlacement="floating" fill="outline" type="password" placeholder="Input password" value={password} onIonChange={e => setPassword(e.detail.value!)}>
-              <IonInputPasswordToggle slot="end" />
-            </IonInput>
-            <IonInput style={inputStyle} label="Repeat Password" labelPlacement="floating" fill="outline" type="password" placeholder="Repeat password" value={confirmPassword} onIonChange={e => setConfirmPassword(e.detail.value!)}>
-              <IonInputPasswordToggle slot="end" />
-            </IonInput>
+          <h1 style={{ fontSize: '26px', fontWeight: 'bold', color: '#333' }}>Create your account</h1>
 
-            <IonButton style={{ margin: '10px auto', width: '100%', borderRadius: '25px', fontWeight: '600', color: '#fff', backgroundColor: '#38ada9' }} onClick={handleOpenVerificationModal} expand="full" shape="round">
-              Register
-            </IonButton>
-
-            <IonButton routerLink="/it35-lab" fill="clear" shape="round" style={{ marginTop: '10px', fontSize: '15px', color: '#38ada9' }}>
-              Already have an account? Sign in
-            </IonButton>
+          {/* Grouped inputs into two columns */}
+          <div style={inputContainerStyle}>
+            <IonInput style={{...inputStyle, flex: 1}} label="Username" labelPlacement="floating" fill="outline" type="text" placeholder="Enter a unique username" value={username} onIonChange={e => setUsername(e.detail.value!)} />
+            <IonInput style={{...inputStyle, flex: 1}} label="First Name" labelPlacement="floating" fill="outline" type="text" placeholder="Input your name" value={firstName} onIonChange={e => setFirstName(e.detail.value!)} />
           </div>
+
+          <div style={inputContainerStyle}>
+            <IonInput style={{...inputStyle, flex: 1}} label="Last Name" labelPlacement="floating" fill="outline" type="text" placeholder="Input your surname" value={lastName} onIonChange={e => setLastName(e.detail.value!)} />
+            <IonInput style={{...inputStyle, flex: 1}} label="Email" labelPlacement="floating" fill="outline" type="email" placeholder="Any Email" value={email} onIonChange={e => setEmail(e.detail.value!)} />
+          </div>
+
+          <div style={inputContainerStyle}>
+            <IonInput style={{...inputStyle, flex: 1}} label="Password" labelPlacement="floating" fill="outline" type="password" placeholder="Input password" value={password} onIonChange={e => setPassword(e.detail.value!)} >
+              <IonInputPasswordToggle slot="end" />
+            </IonInput>
+            <IonInput style={{...inputStyle, flex: 1}} label="Repeat Password" labelPlacement="floating" fill="outline" type="password" placeholder="Repeat password" value={confirmPassword} onIonChange={e => setConfirmPassword(e.detail.value!)} >
+              <IonInputPasswordToggle slot="end" />
+            </IonInput>
+          </div>
+
+          <IonButton style={{ margin: '10px auto', width: '100%', borderRadius: '25px', fontWeight: '600', color: '#fff', backgroundColor: '#38ada9' }} onClick={handleOpenVerificationModal} expand="full" shape="round">
+            Register
+          </IonButton>
+
+          <IonButton routerLink="/it35-lab" fill="clear" shape="round" style={{ marginTop: '10px', fontSize: '15px', color: '#38ada9' }}>
+            Already have an account? Sign in
+          </IonButton>
         </div>
 
         {/* Modals */}
@@ -214,13 +240,11 @@ const Register: React.FC = () => {
             </IonCard>
           </IonContent>
         </IonModal>
- 
+
         <IonModal isOpen={showSuccessModal} onDidDismiss={() => setShowSuccessModal(false)}>
           <IonContent className="ion-padding" style={{ textAlign: 'center' }}>
             <div style={{ marginTop: '30%', padding: '30px', borderRadius: '20px', boxShadow: '0 6px 18px rgba(0, 0, 0, 0.1)', backgroundColor: '#ffffff' }}>
-              <IonTitle style={{ fontSize: '22px', color: '#28a745' }}>
-                ✅ Registration Successful!
-              </IonTitle>
+              <IonTitle style={{ fontSize: '22px', color: '#28a745' }}>✅ Registration Successful!</IonTitle>
               <IonText>
                 <p>Your account has been created successfully.</p>
                 <p>Please check your email to verify your account.</p>
@@ -231,11 +255,11 @@ const Register: React.FC = () => {
             </div>
           </IonContent>
         </IonModal>
- 
+
         <AlertBox message={alertMessage} isOpen={showAlert} onClose={() => setShowAlert(false)} />
       </IonContent>
     </IonPage>
   );
 };
 
-export default Register; 
+export default Register;
